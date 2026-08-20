@@ -1,0 +1,28 @@
+{
+  "row_scores": {
+    "gpt_oss_public": 53.010000000000005
+  },
+  "per_model": {
+    "gpt_oss": {
+      "candidates_received": 605,
+      "guardrail_scores": {
+        "public": {
+          "score": 53.010000000000005,
+          "summary": {
+            "score": 53.010000000000005,
+            "score_raw": 10602.0,
+            "findings_count": 589,
+            "unique_cells": 589,
+            "unique_canonical_cells": 589
+          },
+          "findings_validated": 589,
+          "timed_out": true,
+          "candidates_replayed": 589
+        }
+      }
+    }
+  },
+  "guardrail_configs": [
+    "public"
+  ]
+}
