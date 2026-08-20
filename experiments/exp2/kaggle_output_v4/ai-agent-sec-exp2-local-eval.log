@@ -1,0 +1,112 @@
+[{"stream_name":"stderr","time":6.156240655,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.156321033,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.156327216,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.156336292,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.704251497,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.704305247,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.70430916,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.704311784,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":7.817129088,"data":"SDK root: /kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks\n"}
+,{"stream_name":"stdout","time":7.817177569,"data":"GPU 0: Tesla P100-PCIE-16GB (UUID: GPU-a96808cc-a859-51d0-3029-2efab2d786b2)\n"}
+,{"stream_name":"stdout","time":77.262332331,"data":"llama_cpp installed: 0.3.35 (log -\u003e logs/pip_install.log)\n"}
+,{"stream_name":"stdout","time":77.27607183,"data":"Writing /kaggle/working/attack.py\n"}
+,{"stream_name":"stdout","time":142.588232549,"data":"gemma GGUF ready: 16.9 GB in 65s\n"}
+,{"stream_name":"stdout","time":190.811681619,"data":"[gemma] full offload failed after 45s; retrying partial n_gpu_layers=20\n"}
+,{"stream_name":"stderr","time":190.898147002,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":190.898180727,"data":"  File \"/tmp/ipykernel_22/45874777.py\", line 10, in \u003ccell line: 0\u003e\n"}
+,{"stream_name":"stderr","time":190.898187099,"data":"    gemma_model_server._server.load_model()\n"}
+,{"stream_name":"stderr","time":190.898192676,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/kaggle_evaluation/jed_attack_134815/gguf_model_server.py\", line 114, in load_model\n"}
+,{"stream_name":"stderr","time":190.898198171,"data":"    return self._load_llm()\n"}
+,{"stream_name":"stderr","time":190.898202662,"data":"           ^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.898207297,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/kaggle_evaluation/jed_attack_134815/gguf_model_server.py\", line 153, in _load_llm\n"}
+,{"stream_name":"stderr","time":190.898212337,"data":"    return self._load_backend().llm\n"}
+,{"stream_name":"stderr","time":190.8982169,"data":"           ^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.898221497,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/kaggle_evaluation/jed_attack_134815/gguf_model_server.py\", line 141, in _load_backend\n"}
+,{"stream_name":"stderr","time":190.89822655,"data":"    self._backend = LlamaCppChatTemplateBackend.from_model_path(\n"}
+,{"stream_name":"stderr","time":190.898231161,"data":"                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.898235823,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/aicomp_sdk/agents/hf_chat_template/backends/llama_cpp.py\", line 43, in from_model_path\n"}
+,{"stream_name":"stderr","time":190.898240903,"data":"    llm = resolved_llama_cls(\n"}
+,{"stream_name":"stderr","time":190.89824542,"data":"          ^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.898287728,"data":"  File \"/usr/local/lib/python3.12/dist-packages/llama_cpp/llama.py\", line 388, in __init__\n"}
+,{"stream_name":"stderr","time":190.898294188,"data":"    internals.LlamaModel(\n"}
+,{"stream_name":"stderr","time":190.8982979,"data":"  File \"/usr/local/lib/python3.12/dist-packages/llama_cpp/_internals.py\", line 62, in __init__\n"}
+,{"stream_name":"stderr","time":190.898301769,"data":"    raise ValueError(f\"Failed to load model from file: {path_model}\")\n"}
+,{"stream_name":"stderr","time":190.898305545,"data":"ValueError: Failed to load model from file: /root/.cache/huggingface/hub/models--unsloth--gemma-4-26B-A4B-it-GGUF/snapshots/c099eb48e663fd284577b04978a94ffccb261841/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf\n"}
+,{"stream_name":"stderr","time":190.898310663,"data":"\n"}
+,{"stream_name":"stderr","time":190.898314058,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":190.898317641,"data":"  File \"/tmp/ipykernel_22/45874777.py\", line 10, in \u003ccell line: 0\u003e\n"}
+,{"stream_name":"stderr","time":190.898321608,"data":"    gemma_model_server._server.load_model()\n"}
+,{"stream_name":"stderr","time":190.898325137,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/kaggle_evaluation/jed_attack_134815/gguf_model_server.py\", line 114, in load_model\n"}
+,{"stream_name":"stderr","time":190.898329242,"data":"    return self._load_llm()\n"}
+,{"stream_name":"stderr","time":190.898332742,"data":"           ^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.898337468,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/kaggle_evaluation/jed_attack_134815/gguf_model_server.py\", line 153, in _load_llm\n"}
+,{"stream_name":"stderr","time":190.898341592,"data":"    return self._load_backend().llm\n"}
+,{"stream_name":"stderr","time":190.898345119,"data":"           ^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.89836644,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/kaggle_evaluation/jed_attack_134815/gguf_model_server.py\", line 141, in _load_backend\n"}
+,{"stream_name":"stderr","time":190.898370899,"data":"    self._backend = LlamaCppChatTemplateBackend.from_model_path(\n"}
+,{"stream_name":"stderr","time":190.898374749,"data":"                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.89837839,"data":"  File \"/kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks/aicomp_sdk/agents/hf_chat_template/backends/llama_cpp.py\", line 43, in from_model_path\n"}
+,{"stream_name":"stderr","time":190.898382412,"data":"    llm = resolved_llama_cls(\n"}
+,{"stream_name":"stderr","time":190.898385891,"data":"          ^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":190.898389355,"data":"  File \"/usr/local/lib/python3.12/dist-packages/llama_cpp/llama.py\", line 388, in __init__\n"}
+,{"stream_name":"stderr","time":190.898393115,"data":"    internals.LlamaModel(\n"}
+,{"stream_name":"stderr","time":190.89839657,"data":"  File \"/usr/local/lib/python3.12/dist-packages/llama_cpp/_internals.py\", line 62, in __init__\n"}
+,{"stream_name":"stderr","time":190.898400387,"data":"    raise ValueError(f\"Failed to load model from file: {path_model}\")\n"}
+,{"stream_name":"stderr","time":190.898404118,"data":"ValueError: Failed to load model from file: /root/.cache/huggingface/hub/models--unsloth--gemma-4-26B-A4B-it-GGUF/snapshots/c099eb48e663fd284577b04978a94ffccb261841/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf\n"}
+,{"stream_name":"stdout","time":195.90006244,"data":"[gemma] loaded (partial offload) in 50s\n"}
+,{"stream_name":"stderr","time":204.379045011,"data":"Kernel died while waiting for execute reply.\n"}
+,{"stream_name":"stderr","time":204.386893702,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":204.386925253,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbclient/client.py\", line 949, in async_execute_cell\n"}
+,{"stream_name":"stderr","time":204.388964579,"data":"    exec_reply = await self.task_poll_for_reply\n"}
+,{"stream_name":"stderr","time":204.388990408,"data":"                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.388996364,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbclient/client.py\", line 730, in _async_poll_for_reply\n"}
+,{"stream_name":"stderr","time":204.389451476,"data":"    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))\n"}
+,{"stream_name":"stderr","time":204.389518082,"data":"          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.389528963,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbclient/util.py\", line 96, in ensure_async\n"}
+,{"stream_name":"stderr","time":204.390179387,"data":"    result = await obj\n"}
+,{"stream_name":"stderr","time":204.390198767,"data":"             ^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.390203585,"data":"  File \"/usr/local/lib/python3.12/dist-packages/jupyter_client/channels.py\", line 224, in get_msg\n"}
+,{"stream_name":"stderr","time":204.390954014,"data":"    ready = await self.socket.poll(timeout)\n"}
+,{"stream_name":"stderr","time":204.390969798,"data":"            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.39097801,"data":"asyncio.exceptions.CancelledError\n"}
+,{"stream_name":"stderr","time":204.390981004,"data":"\n"}
+,{"stream_name":"stderr","time":204.390983576,"data":"During handling of the above exception, another exception occurred:\n"}
+,{"stream_name":"stderr","time":204.390986552,"data":"\n"}
+,{"stream_name":"stderr","time":204.390989109,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":204.390991769,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":204.39099511,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 116, in execute_notebook\n"}
+,{"stream_name":"stderr","time":204.391821413,"data":"    nb = papermill_engines.execute_notebook_with_engine(\n"}
+,{"stream_name":"stderr","time":204.391838087,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.391843479,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/engines.py\", line 49, in execute_notebook_with_engine\n"}
+,{"stream_name":"stderr","time":204.392568655,"data":"    return self.get_engine(engine_name).execute_notebook(nb, kernel_name, **kwargs)\n"}
+,{"stream_name":"stderr","time":204.392670474,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.392703593,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/engines.py\", line 371, in execute_notebook\n"}
+,{"stream_name":"stderr","time":204.392925217,"data":"    cls.execute_managed_notebook(nb_man, kernel_name, log_output=log_output, **kwargs)\n"}
+,{"stream_name":"stderr","time":204.392985035,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/engines.py\", line 443, in execute_managed_notebook\n"}
+,{"stream_name":"stderr","time":204.393312909,"data":"    return PapermillNotebookClient(nb_man, **final_kwargs).execute()\n"}
+,{"stream_name":"stderr","time":204.39332725,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.393345583,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/clientwrap.py\", line 45, in execute\n"}
+,{"stream_name":"stderr","time":204.394061986,"data":"    self.papermill_execute_cells()\n"}
+,{"stream_name":"stderr","time":204.39407237,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/clientwrap.py\", line 72, in papermill_execute_cells\n"}
+,{"stream_name":"stderr","time":204.394217843,"data":"    self.execute_cell(cell, index)\n"}
+,{"stream_name":"stderr","time":204.394241416,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbclient/util.py\", line 84, in wrapped\n"}
+,{"stream_name":"stderr","time":204.394430889,"data":"    return just_run(coro(*args, **kwargs))\n"}
+,{"stream_name":"stderr","time":204.394453019,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.394458861,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbclient/util.py\", line 62, in just_run\n"}
+,{"stream_name":"stderr","time":204.394582598,"data":"    return loop.run_until_complete(coro)\n"}
+,{"stream_name":"stderr","time":204.394690515,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.394706542,"data":"  File \"/usr/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\n"}
+,{"stream_name":"stderr","time":204.396464012,"data":"    return future.result()\n"}
+,{"stream_name":"stderr","time":204.396479189,"data":"           ^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":204.396487566,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbclient/client.py\", line 953, in async_execute_cell\n"}
+,{"stream_name":"stderr","time":204.396919918,"data":"    raise DeadKernelError(\"Kernel died\")\n"}
+,{"stream_name":"stderr","time":204.396932923,"data":"nbclient.exceptions.DeadKernelError: Kernel died\n"}
+,{"stream_name":"stderr","time":206.585188025,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":206.585237599,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":206.741091111,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":206.741131788,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":207.406321194,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":207.703323907,"data":"[NbConvertApp] Writing 27771 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":210.057781029,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":210.523762919,"data":"[NbConvertApp] Writing 353063 bytes to __results__.html\n"}
+]

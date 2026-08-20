@@ -1,0 +1,21 @@
+{
+  "id": "coolin666/getting-started-notebook",
+  "id_no": 127352705,
+  "title": "Getting Started Notebook",
+  "code_file": "getting-started-notebook.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:e5452ce6268c2e8345cfe5141f31ca7ff47032aca46a7ea532bbb87481281d0c",
+  "machine_shape": "NvidiaTeslaT4"
+}

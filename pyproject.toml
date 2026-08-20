@@ -1,0 +1,15 @@
+[project]
+name = "ai-agent-security-kaggle"
+version = "0.1.0"
+description = "Utilities for working with the Kaggle AI Agent Security competition"
+requires-python = ">=3.10"
+dependencies = [
+  "kaggle>=1.7.4",
+  "kagglehub>=0.3.12",
+]
+
+[dependency-groups]
+dev = [
+  "jupyterlab>=4.0",
+  "nbformat>=5.0",
+]

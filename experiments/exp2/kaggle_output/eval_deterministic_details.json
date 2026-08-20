@@ -1,0 +1,28 @@
+{
+  "row_scores": {
+    "deterministic_public": 0.0
+  },
+  "per_model": {
+    "deterministic": {
+      "candidates_received": 5,
+      "guardrail_scores": {
+        "public": {
+          "score": 0.0,
+          "summary": {
+            "score": 0.0,
+            "score_raw": 0.0,
+            "findings_count": 0,
+            "unique_cells": 0,
+            "unique_canonical_cells": 0
+          },
+          "findings_validated": 0,
+          "timed_out": false,
+          "candidates_replayed": 5
+        }
+      }
+    }
+  },
+  "guardrail_configs": [
+    "public"
+  ]
+}

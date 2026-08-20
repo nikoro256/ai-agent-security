@@ -1,0 +1,24 @@
+{
+  "id": "souldrive/why-your-attack-completes-but-scores-blank",
+  "id_no": 124320456,
+  "title": "Why Your Attack Completes but Scores BLANK \ud83e\uddf1",
+  "code_file": "why-your-attack-completes-but-scores-blank.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "data visualization",
+    "beginner"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:e5452ce6268c2e8345cfe5141f31ca7ff47032aca46a7ea532bbb87481281d0c",
+  "machine_shape": "None"
+}
