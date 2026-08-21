@@ -1,0 +1,39 @@
+[{"stream_name":"stderr","time":7.155830786,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.156442335,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.1564473060000005,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.156449976,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.786634782,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.786669161,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.786675352,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.786679646,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":9.065135193,"data":"SDK root: /kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks\n"}
+,{"stream_name":"stdout","time":9.065188364,"data":"GPU 0: Tesla T4 (UUID: GPU-c4fb259d-a186-baab-07e0-f0906683a417)\n"}
+,{"stream_name":"stdout","time":9.065193907,"data":"GPU 1: Tesla T4 (UUID: GPU-429c88ec-d4d8-e07c-ea40-1d9442c3eef4)\n"}
+,{"stream_name":"stdout","time":86.950965298,"data":"llama_cpp installed: 0.3.35 (log -\u003e logs/pip_install.log)\n"}
+,{"stream_name":"stdout","time":86.96467935,"data":"Writing /kaggle/working/attack.py\n"}
+,{"stream_name":"stdout","time":204.58830492,"data":"gpt_oss 11.6 GB + gemma 16.9 GB ready in 118s\n"}
+,{"stream_name":"stdout","time":263.583294656,"data":"[gpt_oss] model loaded in 56s\n"}
+,{"stream_name":"stdout","time":316.16248963,"data":"[eval_gpt_oss] DONE in 53s\n"}
+,{"stream_name":"stdout","time":316.162521016,"data":"            Id  Score\n"}
+,{"stream_name":"stdout","time":316.16252775,"data":"gpt_oss_public   0.41\n"}
+,{"stream_name":"stdout","time":316.162533777,"data":"gpt_oss regen skipped: 'NoneType' object has no attribute 'llm'\n"}
+,{"stream_name":"stdout","time":316.16253935,"data":"gpt_oss pairs: 50 regenerated: []\n"}
+,{"stream_name":"stdout","time":394.733890315,"data":"[gemma] model loaded in 78s\n"}
+,{"stream_name":"stdout","time":426.602986661,"data":"[eval_gemma] DONE in 32s\n"}
+,{"stream_name":"stdout","time":426.603041982,"data":"          Id  Score\n"}
+,{"stream_name":"stdout","time":426.603062487,"data":"gemma_public   0.41\n"}
+,{"stream_name":"stdout","time":426.603068212,"data":"gemma regen skipped: 'NoneType' object has no attribute 'llm'\n"}
+,{"stream_name":"stdout","time":426.603073966,"data":"gemma pairs: 94 regenerated: []\n"}
+,{"stream_name":"stdout","time":426.619082339,"data":"          Id  Score\n"}
+,{"stream_name":"stdout","time":426.619118137,"data":"gemma_public   0.41\n"}
+,{"stream_name":"stdout","time":426.619124439,"data":"            Id  Score\n"}
+,{"stream_name":"stdout","time":426.61912916,"data":"gpt_oss_public   0.41\n"}
+,{"stream_name":"stderr","time":432.487864497,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":432.487951293,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":432.773683828,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":432.773709939,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":433.605128978,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":433.91784095,"data":"[NbConvertApp] Writing 27517 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":436.512546016,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":437.631524139,"data":"[NbConvertApp] Writing 352108 bytes to __results__.html\n"}
+]

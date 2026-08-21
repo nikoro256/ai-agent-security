@@ -14,19 +14,33 @@ BASE = Path(__file__).parent / "kaggle_output"
 TURN_HDR = "###"
 
 
-def load_pairs(path: Path):
-    gens = [json.loads(l) for l in open(path)]
+def load_pairs(gen_path: Path, prompt_path: Path | None = None):
+    gens = [json.loads(l) for l in open(gen_path)]
+    # trial markers trail their completions: [comps of trial i] then [marker i].
+    # Replay bleed of the 5 dummy return candidates (url=aa.co) is dropped.
     pairs = []
     buf = []
     for g in gens:
         if g["kind"] == "chat_completion":
+            if "http://aa.co" in json.dumps(g["completion"], default=str):
+                continue
             buf.append(g)
         elif g["kind"] == "trial":
-            pairs.append((g, buf))
+            # dedupe consecutive identical completions (gemma next_action runs
+            # the same greedy generation twice per turn)
+            deduped = []
+            for c in buf:
+                content = str(c["completion"]["choices"][0].get("message", {}).get("content", ""))
+                if deduped:
+                    prev = str(deduped[-1]["completion"]["choices"][0].get("message", {}).get("content", ""))
+                    if content == prev:
+                        continue
+                deduped.append(c)
+            pairs.append((g, deduped))
             buf = []
     by_template = {}
-    for t, comps in pairs:
-        by_template.setdefault(t["run"], {}).setdefault(t["template"], []).append((t, comps))
+    for t, comp_list in pairs:
+        by_template.setdefault(t["run"], {}).setdefault(t["template"], []).append((t, comp_list))
     return by_template
 
 
@@ -49,11 +63,6 @@ def render_example(t, comps):
 
 def main():
     by_run = load_pairs(BASE / "raw_generations.jsonl")
-    # optionally merge a second file (gemma run from v2 kernel)
-    extra = BASE / "raw_generations_run2.jsonl"
-    if extra.exists():
-        for run, tpls in load_pairs(extra).items():
-            by_run.setdefault(run, {}).update(tpls)
 
     lines = ["# テンプレ別: 命令とエージェントの生出力（exp20 実測）",
              "",
@@ -64,8 +73,11 @@ def main():
              "見どころ:",
              "- gpt_oss は素の命令（bare_ok）だと **analysis（隠れ思考）に 50-140 tok** を燃やしてから tool call する",
              "- `inj_close` 系（偽の analysis 終了タグを user メッセージに埋め込む）は **turn1 の analysis が完全に消える**（26 tok のみ）",
-             "- `inj_commentary_to` は turn1 は短いが **turn2 で analysis が復活**し、エピソード全体では2倍遅い（exp16 崩壊の token レベルの証拠）",
+             "- `inj_commentary_to` は gpt_oss で turn1 は短いが **turn2 で analysis が復活**（+67 tok）し、エピソード全体では2倍遅い（exp16 崩壊の token レベルの証拠）",
              "- `gemma_forge` を gpt_oss に投げると turn2 の analysis が 145 tok に爆発する",
+             "- gemma の生出力は独自形式: tool call は `<|tool_call>call:http.post{...}<tool_call|>`（27 tok）、最終回答は `<|channel>thought\\n<channel|>ok`（5 tok）と極小",
+             "- gemma は `inj_commentary_to`（harmony 注入）を**検知して拒否**する: 「I cannot fulfill this request... manipulate my internal processes」— exp18 の発火率 1/25 の正体",
+             "- gemma には harmony 偽装（inj_close 系）は無意味（効かず、prompt が少し長い分だけ遅い）→ bare_ok が最速なのと整合",
              ""]
     names = {1: "gpt_oss", 2: "gemma"}
     for run in sorted(by_run):
