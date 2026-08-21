@@ -154,6 +154,7 @@ kernel-metadata.json に `"machine_shape": "NvidiaTeslaT4"` を入れる（`"acc
 | 2026-08-21 08:34 | nikoro256/ai-agent-sec-exp15-submit v1 (ref 55655811) | exp15（exp12 race + 探索 max_tool_hops=1。gpt_oss 探索 0.54秒/件・banked 981 = exp12 の1.7倍。本番で探索律速なら replay 枠一杯まで findings 増の賭け） | PENDING |
 | 2026-08-21 08:36 | nikoro256/ai-agent-sec-exp16b-submit v1 (ref 55655828) | exp16b（bare_ok + inj_close 系5種の安全 race + hops=1 探索。exp16 で race が選んだ inj_commentary_to が hops=8 replay で病理的に遅く gpt_oss 288/932 しか消化されず崩壊したため、commentary 系と bare を除外） | PENDING |
 | 2026-08-21 09:27 | nikoro256/ai-agent-sec-exp17-submit v1 (ref 55656838) | exp17（replay-aware race: hops=8 probe 選択 + hops=1 fill。ローカル過去最高 gpt 55.71/619件・gemma 51.66/574件） | PENDING（新日付枠 1/5） |
+| 2026-08-21 10:47 | nikoro256/ai-agent-sec-exp19-submit v1 (ref 55657875) | exp19（最少2probe ルーティング版 exp17。ローカル exp17 と互角・gemma 過去最高578 replayed） | PENDING（2/5） |
 
 - **REPLAY_BUDGET_S の誤り**: attack.py 内の replay 予算仮定は 9000秒だったが、gateway ソース（jed_attack_gateway.py:60-63）の正値は **8750秒**（generation・各replay共通）。exp5/exp6 の cap は 0.97×9000=8730 < 8750 で辛うじてセーフだが、**exp2-submit（v6系）の cap は 0.99×9000=8910 > 8750 で超過リスクあり**（帳簿チェックが機能せず wall-clock 頼み + replay 側は fresh env 構築コストが乗る）。今後は REPLAY_BUDGET_S=8750 を使うこと
 - submit には `-f submission.csv` の指定が必須（省略すると 400 Bad Request）。さらに **CWD に `submission.csv` がある状態で `-f submission.csv`（裸のファイル名）を渡さないと 400 になる**（`experiments/submission_placeholder.csv` のような別名・別パスでは 400 だった。exp7/7b 提出時に実測）
