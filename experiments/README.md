@@ -154,15 +154,15 @@ kernel-metadata.json に `"machine_shape": "NvidiaTeslaT4"` を入れる（`"acc
 | 2026-08-21 08:34 | nikoro256/ai-agent-sec-exp15-submit v1 (ref 55655811) | exp15（exp12 race + 探索 max_tool_hops=1。gpt_oss 探索 0.54秒/件・banked 981 = exp12 の1.7倍。本番で探索律速なら replay 枠一杯まで findings 増の賭け） | **public 75.960**（exp8b と**完全一致する同点**。探索スループット2倍・候補供給1.7倍でも replay 側が律速なのでスコア不変 → 本番も replay 律速が確定。供給は既に過剰） |
 | 2026-08-21 08:36 | nikoro256/ai-agent-sec-exp16b-submit v1 (ref 55655828) | exp16b（bare_ok + inj_close 系5種の安全 race + hops=1 探索。exp16 で race が選んだ inj_commentary_to が hops=8 replay で病理的に遅く gpt_oss 288/932 しか消化されず崩壊したため、commentary 系と bare を除外） | **public 89.280（新ベスト、exp12 比 +2.2）**。87 天井仮説を突破 → 天井はテンプレの replay 速度依存で固定ではない。安全テンプレ絞込みで exp16 の罠（hops=1 で速いが hops=8 replay で遅い）を回避しつつ hops=1 探索の恩恵を取得 |
 | 2026-08-21 09:27 | nikoro256/ai-agent-sec-exp17-submit v1 (ref 55656838) | exp17（replay-aware race: hops=8 probe 選択 + hops=1 fill。ローカル過去最高 gpt 55.71/619件・gemma 51.66/574件） | **public 89.910（新ベスト、exp16b 比 +0.63）**。≈999件 replay 消化（exp16b は992件）。probe hops=8 の replay-aware 選択が微増効果（天井圏では ±1 はノイズ級だが方向は一致） |
-| 2026-08-21 10:47 | nikoro256/ai-agent-sec-exp19-submit v1 (ref 55657875) | exp19（最少2probe ルーティング版 exp17。ローカル exp17 と互角・gemma 過去最高578 replayed） | PENDING（2/5） |
+| 2026-08-21 10:47 | nikoro256/ai-agent-sec-exp19-submit v1 (ref 55657875) | exp19（最少2probe ルーティング版 exp17。ローカル exp17 と互角・gemma 過去最高578 replayed） | **public 89.370**（exp17 比 -0.54、exp16b 比 +0.09）。probe 削減の探索時間節約は replay 律速では効かず。exp17 > exp19 ≈ exp16b の順位はローカル予測と一致 |
 
 - **REPLAY_BUDGET_S の誤り**: attack.py 内の replay 予算仮定は 9000秒だったが、gateway ソース（jed_attack_gateway.py:60-63）の正値は **8750秒**（generation・各replay共通）。exp5/exp6 の cap は 0.97×9000=8730 < 8750 で辛うじてセーフだが、**exp2-submit（v6系）の cap は 0.99×9000=8910 > 8750 で超過リスクあり**（帳簿チェックが機能せず wall-clock 頼み + replay 側は fresh env 構築コストが乗る）。今後は REPLAY_BUDGET_S=8750 を使うこと
 - submit には `-f submission.csv` の指定が必須（省略すると 400 Bad Request）。さらに **CWD に `submission.csv` がある状態で `-f submission.csv`（裸のファイル名）を渡さないと 400 になる**（`experiments/submission_placeholder.csv` のような別名・別パスでは 400 だった。exp7/7b 提出時に実測）
 - 提出用ノートブック: `experiments/exp2_submit/`, `experiments/exp5_submit/`, `experiments/exp6_submit/`, `experiments/exp7_submit/`, `experiments/exp7b_submit/`（exp1 のサーブ骨格 + 各 attack.py。ローカル評価用の600秒capは提出版には元々無く、gateway 支給の 8750秒/フェーズをそのまま使う）
 
-**ローカル検証 vs LB の相関（2026-08-22、n=9）**: `local_vs_lb_correlation.png` 参照。
-Pearson r=0.94（p=0.0002）、Spearman ρ=0.87（p=0.0025）で**順位相関も有意になった**（exp17 追加で改善。n=8 時点は ρ=0.81 p=0.015）。
-回帰: LB ≈ -24.2 + 2.09 × local。ただしローカルは replay 飽和で 25〜54 に圧縮され、
+**ローカル検証 vs LB の相関（2026-08-22、n=10）**: `local_vs_lb_correlation.png` 参照。
+Pearson r=0.94（p<0.0001）、Spearman ρ=0.90（p=0.0003）で**順位相関も強く有意**。
+回帰: LB ≈ -25.3 + 2.12 × local。ただしローカルは replay 飽和で 25〜54 に圧縮され、
 天井付近の1.2点差が LB 5.2点差に化ける（exp2 vs exp5）性質は変わらない。**小差の見極めはローカルでは不可能。
 LB 提出自体を 1 因子ずつ変える A/B テストとして設計すること**。
 | exp8a/b/c | 出力トークン微削減3系統（a: inj_close="OK."+reply "."+cap撤廃、b: a+gemmaフォーマットforge、 c: 命令文最短化"now."なし）。T4 x2・600秒/モデル | **全バリアント有意な改善なし**。秒/件: gpt_oss 0.839-0.874（基準0.84）、gemma 0.963-0.966（基準0.93）で±5%のノイズ範囲。発火率は全テンプレ100%で天井。gemma_forgeは発火するが速くない（gemma 1.00 vs bare_ok 0.94）で race 敗退。スコア51-52はローカル天井。**トークン微削減は測れる効果なし → 1候補コストは文面ではなくエピソード構造が支配的。提出見送り** |
