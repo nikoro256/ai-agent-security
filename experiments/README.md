@@ -149,7 +149,7 @@ kernel-metadata.json に `"machine_shape": "NvidiaTeslaT4"` を入れる（`"acc
 | 2026-08-19 19:01 | nikoro256/ai-agent-sec-exp6-submit v1 (ref 55620709) | exp6（exp5エンジン + v15型レイテンシ判別テンプレ分岐） | **public 58.495**（exp5 比 -27%。verbose/forge テンプレは本番で大きく後退 → 悪手確定） |
 | 2026-08-20 00:18 | nikoro256/ai-agent-sec-exp7-submit v1 (ref 55626421) | exp7（マルチメッセージ K=4、1通目のみ検証。ローカル raw/finding=66 確認済み） | **public 50.550**（~153候補/行。raw/replay秒 1.16 vs exp2 の 1.96 → K 倍ゲイン出ず） |
 | 2026-08-20 00:18 | nikoro256/ai-agent-sec-exp7b-submit v1 (ref 55626425) | exp7b（同 K=8。ローカル raw/finding=130 確認済み） | **public 53.860**（~83候補/行。K=8 > K=4 だが償却効果は微小。本番 replay はメッセージごとにフルエピソード課金の挙動） |
-| 2026-08-21 03:39 | nikoro256/ai-agent-sec-exp12-submit v1 (ref 55652496) | exp12（forge 大家族 race 8テンプレ、cap 撤廃） | PENDING（ローカル v6 比 +3.2%、過去最多候補） |
+| 2026-08-21 03:39 | nikoro256/ai-agent-sec-exp12-submit v1 (ref 55652496) | exp12（forge 大家族 race 8テンプレ、cap 撤廃） | **public 87.075（新ベスト、exp2 比 +1.4）**。ローカル +3.2% が LB でも再現。race 系の有効性を確認 |
 | 2026-08-21 08:34 | nikoro256/ai-agent-sec-exp14-submit v1 (ref 55655809) | exp14（構造 prefill race 6テンプレ。gpt_oss は inj_close_empty=空 analysis を自己選択・0.84秒/件、両モデルで exp12 以上の候補数） | PENDING |
 | 2026-08-21 08:34 | nikoro256/ai-agent-sec-exp15-submit v1 (ref 55655811) | exp15（exp12 race + 探索 max_tool_hops=1。gpt_oss 探索 0.54秒/件・banked 981 = exp12 の1.7倍。本番で探索律速なら replay 枠一杯まで findings 増の賭け） | PENDING |
 | 2026-08-21 08:36 | nikoro256/ai-agent-sec-exp16b-submit v1 (ref 55655828) | exp16b（bare_ok + inj_close 系5種の安全 race + hops=1 探索。exp16 で race が選んだ inj_commentary_to が hops=8 replay で病理的に遅く gpt_oss 288/932 しか消化されず崩壊したため、commentary 系と bare を除外） | PENDING |
