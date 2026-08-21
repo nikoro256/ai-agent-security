@@ -1,0 +1,52 @@
+[{"stream_name":"stderr","time":11.055164005,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":11.05521197,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":11.055218701,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":11.055223675,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":11.816409237,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":11.816440089,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":11.816446602,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":11.816451792,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":13.511383303,"data":"SDK root: /kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks\n"}
+,{"stream_name":"stdout","time":13.511431847,"data":"GPU 0: Tesla T4 (UUID: GPU-b6db3f48-4f1c-7247-5c43-36c8d32662b4)\n"}
+,{"stream_name":"stdout","time":13.511439227,"data":"GPU 1: Tesla T4 (UUID: GPU-51685df8-f060-fe5c-7e12-d2bcdbfcc62b)\n"}
+,{"stream_name":"stdout","time":82.330949611,"data":"llama_cpp installed: 0.3.35 (log -\u003e logs/pip_install.log)\n"}
+,{"stream_name":"stdout","time":82.343482386,"data":"Writing /kaggle/working/attack.py\n"}
+,{"stream_name":"stdout","time":206.592637515,"data":"gpt_oss 11.6 GB + gemma 16.9 GB ready in 124s\n"}
+,{"stream_name":"stdout","time":268.293494742,"data":"[gpt_oss] model loaded in 56s\n"}
+,{"stream_name":"stdout","time":319.876471709,"data":"[eval_gpt_oss] DONE in 52s\n"}
+,{"stream_name":"stdout","time":319.876504652,"data":"            Id  Score\n"}
+,{"stream_name":"stdout","time":319.876513435,"data":"gpt_oss_public   0.41\n"}
+,{"stream_name":"stderr","time":323.560447611,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":323.560479608,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":323.560488155,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":323.562326989,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":323.562351846,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":323.562520111,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":323.562690468,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":323.562701993,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":323.562707039,"data":"Exception encountered at \"In [7]\":\n"}
+,{"stream_name":"stderr","time":323.562711562,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":323.562715932,"data":"AttributeError                            Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":323.562720337,"data":"/tmp/ipykernel_23/821510653.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":323.562725091,"data":"      1 preload_model(\"gpt_oss\")\n"}
+,{"stream_name":"stderr","time":323.562729636,"data":"      2 run_local_eval(\"gpt_oss\", 240, \"eval_gpt_oss\")\n"}
+,{"stream_name":"stderr","time":323.562750256,"data":"----\u003e 3 pair_and_regen(\"gpt_oss\", 1)\n"}
+,{"stream_name":"stderr","time":323.562774612,"data":"\n"}
+,{"stream_name":"stderr","time":323.562778385,"data":"/tmp/ipykernel_23/3715008917.py in pair_and_regen(model_name, run_idx)\n"}
+,{"stream_name":"stderr","time":323.562782403,"data":"     41     ms = importlib.import_module(\n"}
+,{"stream_name":"stderr","time":323.562786143,"data":"     42         f\"kaggle_evaluation.jed_attack_134815.{model_name}_model_server\")\n"}
+,{"stream_name":"stderr","time":323.562790412,"data":"---\u003e 43     llm = ms._server._backend.llm\n"}
+,{"stream_name":"stderr","time":323.562794433,"data":"     44     seen, streams = set(), {}\n"}
+,{"stream_name":"stderr","time":323.56279771,"data":"     45     for p in pairs:\n"}
+,{"stream_name":"stderr","time":323.562801024,"data":"\n"}
+,{"stream_name":"stderr","time":323.56280424,"data":"AttributeError: 'NoneType' object has no attribute 'llm'\n"}
+,{"stream_name":"stderr","time":323.562807664,"data":"\n"}
+,{"stream_name":"stderr","time":326.06336813,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":326.063398014,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":326.282576539,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":326.282618013,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":327.465794442,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":327.760238327,"data":"[NbConvertApp] Writing 28152 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":330.424668769,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":331.322740741,"data":"[NbConvertApp] Writing 353037 bytes to __results__.html\n"}
+]
