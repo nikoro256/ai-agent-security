@@ -1,0 +1,16 @@
+{
+  "id": "nikoro256/ai-agent-sec-interactive-probe",
+  "title": "AI Agent Sec interactive probe",
+  "code_file": "ai-agent-sec-interactive-probe.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_internet": true,
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": []
+}
