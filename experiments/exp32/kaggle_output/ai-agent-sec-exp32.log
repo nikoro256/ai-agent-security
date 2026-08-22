@@ -1,0 +1,35 @@
+[{"stream_name":"stderr","time":7.660753454,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.660809722,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.66081725,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.660821469,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.333293171,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.333330039,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.333335644,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.333339813,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":9.563434914,"data":"SDK root: /kaggle/input/competitions/ai-agent-security-multi-step-tool-attacks\n"}
+,{"stream_name":"stdout","time":9.563473553,"data":"GPU 0: Tesla T4 (UUID: GPU-e863418f-3b4b-1090-962d-40a28638cbeb)\n"}
+,{"stream_name":"stdout","time":9.563476881,"data":"GPU 1: Tesla T4 (UUID: GPU-d16b83d5-53f8-5aee-4f49-87063ce6028c)\n"}
+,{"stream_name":"stdout","time":78.010185924,"data":"llama_cpp installed: 0.3.35 (log -\u003e logs/pip_install.log)\n"}
+,{"stream_name":"stdout","time":78.024137678,"data":"Writing /kaggle/working/attack.py\n"}
+,{"stream_name":"stdout","time":198.336192065,"data":"gpt_oss 11.6 GB + gemma 16.9 GB ready in 120s\n"}
+,{"stream_name":"stdout","time":261.966905986,"data":"[gpt_oss] model loaded in 60s\n"}
+,{"stream_name":"stdout","time":1349.987251405,"data":"[eval_gpt_oss] DONE in 1088s\n"}
+,{"stream_name":"stdout","time":1349.987289469,"data":"            Id  Score\n"}
+,{"stream_name":"stdout","time":1349.987293821,"data":"gpt_oss_public   68.9\n"}
+,{"stream_name":"stdout","time":1430.72175644,"data":"[gemma] model loaded in 80s\n"}
+,{"stream_name":"stdout","time":2538.202288934,"data":"[eval_gemma] DONE in 1108s\n"}
+,{"stream_name":"stdout","time":2538.202347026,"data":"          Id  Score\n"}
+,{"stream_name":"stdout","time":2538.202356697,"data":"gemma_public  30.47\n"}
+,{"stream_name":"stdout","time":2538.223761219,"data":"          Id  Score\n"}
+,{"stream_name":"stdout","time":2538.223794704,"data":"gemma_public  30.47\n"}
+,{"stream_name":"stdout","time":2538.223798989,"data":"            Id  Score\n"}
+,{"stream_name":"stdout","time":2538.223802469,"data":"gpt_oss_public   68.9\n"}
+,{"stream_name":"stderr","time":2543.975181185,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2543.975237519,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2544.281623254,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2544.281664303,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2545.491331204,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":2545.813080645,"data":"[NbConvertApp] Writing 27441 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":2548.341843316,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2549.534572469,"data":"[NbConvertApp] Writing 351683 bytes to __results__.html\n"}
+]
