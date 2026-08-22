@@ -157,19 +157,22 @@ kernel-metadata.json に `"machine_shape": "NvidiaTeslaT4"` を入れる（`"acc
 | 2026-08-21 10:47 | nikoro256/ai-agent-sec-exp19-submit v1 (ref 55657875) | exp19（最少2probe ルーティング版 exp17。ローカル exp17 と互角・gemma 過去最高578 replayed） | **public 89.370**（exp17 比 -0.54、exp16b 比 +0.09）。probe 削減の探索時間節約は replay 律速では効かず。exp17 > exp19 ≈ exp16b の順位はローカル予測と一致 |
 | 2026-08-22 03:22 | nikoro256/ai-agent-sec-exp27-submit v1 (ref 55674975) | exp27（exp2ベース・探索 hops=8、安全6本+inj_close_saynothing race、uncapped・予算8750修正済。ローカル過去最高 avg 56.925 / gpt_oss 62.01 で saynothing 選択・banked 700 全件 replay 消化） | **public 86.355**（ローカル最高だったが exp17 比 **-3.56** に後退。旧回帰予測 ~95 を約 -9 下振れ → local 高位での外挿は過大評価。採点に11.5時間要した） |
 | 2026-08-22 06:36 | nikoro256/ai-agent-sec-exp31-submit v1 (ref 55677572) | exp31（burst12 優先 race: burst が全probe発火かつ raw/trial≥54 なら無条件選択、他は raw/秒 race、フォールバック bare_ok。gpt_oss は12 URL burst で1候補8発火・raw ~130/件、gemma は単発 fallback） | **public 95.220（新ベスト、exp17 比 +5.31）**。回帰予測（n=11 で -15.7+1.91×58.2 = 95.2）と**ほぼ完全一致**。「本番 replay は固定費律速 → 1件あたり raw を上げる burst が正攻法」仮説が的中。frontier の token-forged multipost（1.1× で死蔵）と違い、analysis 短絡済み burst（0.66秒/発火）で効率が立った |
+| 2026-08-22 11:48 | nikoro256/ai-agent-sec-exp32-submit v1 (ref 55690216) | exp32（exp31 の burst12 を burst12_sys に差し替え: 偽 system ターンで analysis 再発を抑制。ローカル gpt_oss 68.90・合成推定 avg 59.56） | **public 94.970**（exp31 比 **-0.25** で微減 = ノイズ域。回帰予測 97.8 を -2.8 下振れ）。採点に ~21時間要した（queue 混雑?）。**偽 system による追加 analysis 抑止は LB では効かず — burst の raw/件は既に天井で、残る差は hosted 側の分散**。exp31 がベストのまま |
 
 - **REPLAY_BUDGET_S の誤り**: attack.py 内の replay 予算仮定は 9000秒だったが、gateway ソース（jed_attack_gateway.py:60-63）の正値は **8750秒**（generation・各replay共通）。exp5/exp6 の cap は 0.97×9000=8730 < 8750 で辛うじてセーフだが、**exp2-submit（v6系）の cap は 0.99×9000=8910 > 8750 で超過リスクあり**（帳簿チェックが機能せず wall-clock 頼み + replay 側は fresh env 構築コストが乗る）。今後は REPLAY_BUDGET_S=8750 を使うこと
 - submit には `-f submission.csv` の指定が必須（省略すると 400 Bad Request）。さらに **CWD に `submission.csv` がある状態で `-f submission.csv`（裸のファイル名）を渡さないと 400 になる**（`experiments/submission_placeholder.csv` のような別名・別パスでは 400 だった。exp7/7b 提出時に実測）
 - 提出用ノートブック: `experiments/exp2_submit/`, `experiments/exp5_submit/`, `experiments/exp6_submit/`, `experiments/exp7_submit/`, `experiments/exp7b_submit/`（exp1 のサーブ骨格 + 各 attack.py。ローカル評価用の600秒capは提出版には元々無く、gateway 支給の 8750秒/フェーズをそのまま使う）
 
-**ローカル検証 vs LB の相関（2026-08-22、n=12）**: `local_vs_lb_correlation.png` 参照。
-Pearson r=0.94（p<0.00001）、Spearman ρ=0.90（p=0.00006）で**順位相関も強く有意**。
-回帰: LB ≈ -15.7 + 1.91 × local。ただしローカルは replay 飽和で 25〜54 に圧縮され、
+**ローカル検証 vs LB の相関（2026-08-23、n=14）**: `local_vs_lb_correlation.png` 参照。
+Pearson r=0.94（p=0.0000008）、Spearman ρ=0.92（p=0.000002）で**順位相関も強く有意**。
+回帰: LB ≈ -13.9 + 1.87 × local（local validation を持つ全提出を包含。exp16b は local 未検証で除外）。
+ただしローカルは replay 飽和で 25〜54 に圧縮され、
 天井付近の1.2点差が LB 5.2点差に化ける（exp2 vs exp5）性質は変わらない。**小差の見極めはローカルでは不可能。
 LB 提出自体を 1 因子ずつ変える A/B テストとして設計すること**。
-2つの対照的な点: **exp27（local 56.9 → LB 86.4、残差 -6.4 = 最大下方乖離）** は単発速度向上が本番固定費に
-転嫁されなかった例。一方 **exp31（local 58.2 ※合成推定 → LB 95.2、残差 ほぼ0）** は「1件あたり raw を上げる
+対照的な点: **exp27（local 56.9 → LB 86.4、残差 -6.4）** は単発速度向上が本番固定費に
+転嫁されなかった例。一方 **exp31（local 58.2 ※合成推定 → LB 95.2、残差 +0.1）** は「1件あたり raw を上げる
 burst12」が予測通りに乗った例。**本番 replay は固定費律速なので、速さではなく raw/件 を上げる設計が効く**。
+exp32（local 59.6 → LB 95.0、残差 -2.7）は burst 改良の限界 = 天井到達を示す。
 | exp8a/b/c | 出力トークン微削減3系統（a: inj_close="OK."+reply "."+cap撤廃、b: a+gemmaフォーマットforge、 c: 命令文最短化"now."なし）。T4 x2・600秒/モデル | **全バリアント有意な改善なし**。秒/件: gpt_oss 0.839-0.874（基準0.84）、gemma 0.963-0.966（基準0.93）で±5%のノイズ範囲。発火率は全テンプレ100%で天井。gemma_forgeは発火するが速くない（gemma 1.00 vs bare_ok 0.94）で race 敗退。スコア51-52はローカル天井。**トークン微削減は測れる効果なし → 1候補コストは文面ではなくエピソード構造が支配的。提出見送り** |
 | 2026-08-20 23:35 | nikoro256/ai-agent-sec-exp8b-submit v1 (ref 55648404) | exp8b（出力トークン極小化: inj_close="OK." + reply "." + gemma_forge race + cap撤廃） | **public 75.960**（exp2 比 -9.7。ローカルでは replayed 576/570 と v6 以上だったが LB で大幅後退） |
 | exp10 | トークン計測（exp2/exp8系7テンプレ × 100trial × 2モデル）。trace の assistant_messages から可視トークン数を測定 | 可視トークンは 11〜31/件。gpt_oss bare_ok は「1 tok・2.5秒」→ **時間は harmony analysis（隠れ思考）に消えており assistant_messages に記録されない**ことが判明。inj_close は gpt_oss で 2.49→0.90秒（思考抑制の定量確認）だが gemma では逆に遅い（1.44 vs 0.94秒）。8c の "now." 削除は gemma で逆効果（30.8 tok）。10倍問題は生成量差ではなく decode 速度差が主因と結論 |
