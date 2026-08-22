@@ -14,6 +14,16 @@
   submission.csv の4行（`{model}_{public,private}`）のうち `*_private` 行が private LB に対応すると読むのが自然
   （裏付け: public LB がローカルの public-only validation と r=0.94 で一致する = 表示スコアに private 行は混ざっていない）。
   ただし private 側の合成（2モデルの private 行の平均か等）は非公開で、慣例上の推定。
+- **discussion による裏付け（2026-08-22 調査、API で全176件走査）**:
+  - ホスト owenvallis（[disc 708629](https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/708629)）:
+    "**The private leaderboard replays the attack candidates returned by your submission against private fixtures and a private guardrail.**"
+    → private LB は private fixtures + private ガードレールでの replay のみ。public ガードレールのスコアは混ざらない。
+  - ホスト Manish Bhatt（同スレッド）: "**Most of private leaderboard and public leaderboard don't overlap.**"
+    → private LB に public 行が含まれるなら大半が一致するはずなので、これは「private LB = private 行のみ」の強い傍証。
+  - 公式 FAQ（[disc 712642](https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/712642)）:
+    attack-generation / public replay / private replay の3フェーズがモデル毎に各9000秒。**public replay と private replay は別フェーズ**。
+  - 「4行全部の平均か？」という質問スレッド（[disc 724875](https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/724875)）に公式回答はなく、
+    コミュニティ回答も Rules の「private LB で決まる」を指すのみ。**「両方で採点」説を裏付ける公式発言は存在しない**（2026-08-22 時点の全 discussion 走査で確認）。
 - **最終提出は2本まで選択可能**（§2.2b "You may select up to two (2) Final Submissions for judging"）。
   → 攻め（public 最高点の高効率版）と守り（private 堅牢版）のポートフォリオを組むべき。
 - タイムライン: **Entry 締切 2026-08-25、最終提出締切 2026-09-01**（いずれも 23:59 UTC）。
