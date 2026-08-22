@@ -1,6 +1,6 @@
 # Shake 対策メモ（private leaderboard への入れ替わり対策）
 
-最終更新: 2026-08-19
+最終更新: 2026-08-22（§7: 2026-08-05 evaluator update と gemma パーサー問題を追記）
 
 このコンペの最大のリスクは「public で高スコア → private で大きく順位が入れ替わる（shake）」こと。
 公式ページにも明記されている通り、**private はより厳しいガードレールで採点される**（"Private leaderboard: scored against a stricter private guardrail (not accessible to competitors)"）。
@@ -48,10 +48,12 @@
 - レイテンシでモデル判別する戦略（exp6）は、private 側でモデル配置や速度が変わると誤判別しうる。
   → 閾値に余裕を持たせる、判別に失敗してもデフォルト戦略で動くフォールバックを必須にする。
 
-### (d) 時間超過（cap 超え）— リスク中（ただし既に対策済み）
+### (d) 時間超過（cap 超え）— リスク小に軽減（2026-08-05 の evaluator update で部分点化）
 
 - replay フェーズの上限は実測で ~8750秒。cap を 9000 にしていた時期のコードは超過リスクあり。
-  exp5/exp6 は REPLAY_SAFE 0.97（≈8730秒）でセーフ。exp2-submit は 8910 で超過リスクあり（採点待ち）。
+- **2026-08-05 の evaluator update（§7）で「replay タイムアウト時はそれまでの蓄積スコアを保持」に変更**。
+  旧ルールの「1候補でもオーバーで全セル0点（replay cliff）」は廃止。exp2-submit（cap 8910）が 85.680 で部分採点された実績あり。
+- ただし attack.py フェーズの超過は依然として提出全体が終了するので、探索側の時間管理は引き続き必要。
 
 ## 3. probe（private 採点の覗き見）は可能か — 結論: 実質不可能
 
@@ -95,3 +97,36 @@
 | exp7/7b（予定） | K=4/K=8 multipost | evaluator 変更に弱い。public 点数は高い見込みだが shake 要員 |
 
 結論: **K=1 の本物 exfil 経路（exp5/6 系）を主軸に据え、K>1 は点数稼ぎの上乗せと割り切る**のが shake に強い構成。
+
+## 7. 評価器アップデート（2026-08-05/06）と gemma パーサー問題（discussion 733058）
+
+出典: [[IMPORTANT] Upcoming Evaluation Updates and Leaderboard Refresh](https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/733058)（Kaggle Staff 投稿、~2026-08-05）。
+
+### update の内容
+
+1. **tool-call パーサーの normalize**: 「Gemma wrapped subsequent tool-call responses in {}, which prevented them from being parsed correctly」への修正。
+   実体は `kaggle_evaluation/jed_attack_134815/gemma_model_server.py` の `KaggleGemma4ToolCallParser` で、
+   引数ブロブが `{` 始まりなら `json.loads` で受理する脱出ハッチ（`_parse_gemma4_arguments_kaggle`）。
+2. **replay タイムアウトの部分点化**（§2d 参照。replay cliff 廃止）。
+3. **LB 全件無効化 + チーム2件のみ rerun**（選択締切 2026-08-07 9am PT）。
+   我々の初提出は 2026-08-19 で、**全提出は新 evaluator で採点済み**。過去スコアとの直接比較は不可。
+
+### 修正は不完全（gemma multi-post は依然壊れる）
+
+- Syed Asad Ali（27位）の詳細再現: hop 0 は `<|"|>` 正規形で通るが、hop 1 で `{{"data": "SECRET_MARKER", ...}}`（**二重ブレース JSON**）を出力して死ぬ。
+  generate を hook して確認する限り、推論時の入力に二重ブレースは無い（ハーネスが描画しているわけではない）。
+  GGUF の `tokenizer.chat_template` は assistant tool call を `{` `}` 無条件出力で描画し、arguments が文字列ならそのまま埋め込む分岐がある。
+- Renee: update 後も `{{"data":<|"|>SECRET_MARKER<|"|>,...}}`（二重ブレース + 内部 `<|"|>` の混合形）で失敗することを報告（json.loads も厳密パーサーも通らない形）。4日前時点でも still broken、運営は未回答。
+- 我々の独自解析（exp29/30 + probe）と一致: gemma の multi-fire は構造的に不安定（1〜2発火天井）。
+  **ただし gemma の自然なドリフト形が二重ブレース `{{...}}` なら脱出ハッチで受理される** — 我々の probe で単一ブレースに崩れたのはプロンプト依存の可能性があり、二重ブレースへの誘導が安定化すれば gemma multi-post の扉はまだ残っている。
+
+### 重要な警告（shake と直接関係）
+
+運営: 「some submissions rely on **implementation-specific behavior of the evaluation harness** rather than demonstrating a security-relevant failure... may not carry over to the evaluation used for **final rankings**」。
+→ harmony 注入（`<|end|><|start|>assistant...`）や control-token 依存の burst/prefill 系はこの警告の射程内。
+**最終提出の選択では「harmony 注入なしでも成立する本物の exfil 経路」の比重を上げるべき**。
+
+### モデル provenance の未解決問題
+
+GGUF の HF リビジョンが 2026-07-17 に変更（b19ae87 → c099eb4、「Gemma official chat template update」、weights 不変で `tokenizer.chat_template` のみ変更）。
+どのリビジョンが public/private/final 採点に使われるか運営の回答なし。テンプレート差分は tool-call 描画に直結するため、probing 結果の再現性に影響しうる。
