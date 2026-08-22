@@ -6,15 +6,18 @@
 公式ページにも明記されている通り、**private はより厳しいガードレールで採点される**（"Private leaderboard: scored against a stricter private guardrail (not accessible to competitors)"）。
 ここでは private 採点の構造・既知の差分・取るべき対策をまとめる。
 
-## 0. 最終順位は private LB のみで決まる（Rules §3.7 / §3.18e、2026-08-22 確認）
+## 0. 最終順位は private LB で決まる（Rules §3.7 / §3.18e、2026-08-22 確認）
 
 - "The potential winner(s) are determined **solely by the leaderboard ranking on the Private Leaderboard**"。
-  **public スコアは最終順位に一切入らない**。足し合わせでも按分でもなく private 100%。
+  public LB は途中経過のフィードバックで、最終順位は private LB が決める。
+- private LB の採点対象: 公式 evaluation ページに "**Private leaderboard**: scored against a stricter private guardrail" と明記。
+  submission.csv の4行（`{model}_{public,private}`）のうち `*_private` 行が private LB に対応すると読むのが自然
+  （裏付け: public LB がローカルの public-only validation と r=0.94 で一致する = 表示スコアに private 行は混ざっていない）。
+  ただし private 側の合成（2モデルの private 行の平均か等）は非公開で、慣例上の推定。
 - **最終提出は2本まで選択可能**（§2.2b "You may select up to two (2) Final Submissions for judging"）。
   → 攻め（public 最高点の高効率版）と守り（private 堅牢版）のポートフォリオを組むべき。
 - タイムライン: **Entry 締切 2026-08-25、最終提出締切 2026-09-01**（いずれも 23:59 UTC）。
-- 4セル構成: gpt_oss/gemma × public/private。public スコア = 2モデルの public 行の平均。
-  private 行はコンペ終了まで非公開。
+- public スコア = 2モデルの public 行の平均。private 行はコンペ終了まで非公開。
 
 ## 1. private 採点の構造（確定事実）
 
