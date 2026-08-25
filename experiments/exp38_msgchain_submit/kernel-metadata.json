@@ -1,0 +1,16 @@
+{
+  "id": "nikoro256/ai-agent-sec-exp38-submit",
+  "title": "AI Agent Sec exp38 submit",
+  "code_file": "ai-agent-sec-exp38-submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_internet": false,
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": []
+}

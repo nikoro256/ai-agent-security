@@ -35,6 +35,7 @@ POINTS: list[tuple[str, float, float]] = [
 # (name, local_avg, LB, note) — raw/件経済が EXFIL 系（18 raw/件）と異なるため回帰には含めない
 REFERENCE_POINTS: list[tuple[str, float, float, str]] = [
     ("exp34", 5.475, 9.405, "cd_2msg 純粋CD: 6 raw/件。local は生成律速・hosted は replay 律速"),
+    ("exp37", 10.39, 18.310, "cd_burst8 race: 34 raw/件。exp34 の約2倍（local→LB 比 1.76 で予測通り）"),
 ]
 
 OUT = Path(__file__).parent / "local_vs_lb_correlation.png"
