@@ -30,12 +30,14 @@ POINTS: list[tuple[str, float, float]] = [
     ("exp27", 56.925, 86.355),
     ("exp31", 58.2, 95.220),   # 合成推定: gpt_oss 66.22 + gemma 単発 fallback 50.22 の平均
     ("exp32", 59.56, 94.970),  # 合成推定: gpt_oss 68.90 + gemma 単発 fallback 50.22 の平均
+    ("exp39", 55.30, 89.080),  # burst12 + gemma exfil_chain7。回帰線上に着地 = chain7 の hosted 優遇なし
 ]
 
 # (name, local_avg, LB, note) — raw/件経済が EXFIL 系（18 raw/件）と異なるため回帰には含めない
 REFERENCE_POINTS: list[tuple[str, float, float, str]] = [
     ("exp34", 5.475, 9.405, "cd_2msg 純粋CD: 6 raw/件。local は生成律速・hosted は replay 律速"),
     ("exp37", 10.39, 18.310, "cd_burst8 race: 34 raw/件。exp34 の約2倍（local→LB 比 1.76 で予測通り）"),
+    ("exp38", 11.26, 15.445, "msgchain8 追加版。local +8% だが LB -15.6%（比 1.37）— 多 msg 候補は hosted replay で逆効果"),
 ]
 
 OUT = Path(__file__).parent / "local_vs_lb_correlation.png"

@@ -1,0 +1,28 @@
+{
+  "row_scores": {
+    "gemma_public": 50.13
+  },
+  "per_model": {
+    "gemma": {
+      "candidates_received": 181,
+      "guardrail_scores": {
+        "public": {
+          "score": 50.13,
+          "summary": {
+            "score": 50.13,
+            "score_raw": 10026.0,
+            "findings_count": 181,
+            "unique_cells": 181,
+            "unique_canonical_cells": 181
+          },
+          "findings_validated": 181,
+          "timed_out": false,
+          "candidates_replayed": 181
+        }
+      }
+    }
+  },
+  "guardrail_configs": [
+    "public"
+  ]
+}
