@@ -31,6 +31,10 @@ POINTS: list[tuple[str, float, float]] = [
     ("exp31", 58.2, 95.220),   # 合成推定: gpt_oss 66.22 + gemma 単発 fallback 50.22 の平均
     ("exp32", 59.56, 94.970),  # 合成推定: gpt_oss 68.90 + gemma 単発 fallback 50.22 の平均
     ("exp39", 55.30, 89.080),  # burst12 + gemma exfil_chain7。回帰線上に着地 = chain7 の hosted 優遇なし
+    ("exp50", 62.105, 95.940),  # burst12 + gemma ペアくじ 8発火量産（exp51 両モデル実測 65.41/58.8）。新ベスト
+    ("exp52", 64.10, 108.495),  # burst12 + gemma bare-value ペアくじ（fill 95/95 @130 raw）。回帰予測を上振れ、新ベスト
+    ("exp52b", 64.10, 109.770),  # exp52 分散測定用の同一再提出（ユーザー手動）
+    ("exp52c", 64.10, 106.035),  # 同上。3件 mean 108.10・range 3.74 = jitter ±2 級
 ]
 
 # (name, local_avg, LB, note) — raw/件経済が EXFIL 系（18 raw/件）と異なるため回帰には含めない
