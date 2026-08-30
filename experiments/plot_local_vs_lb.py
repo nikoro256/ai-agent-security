@@ -42,6 +42,8 @@ REFERENCE_POINTS: list[tuple[str, float, float, str]] = [
     ("exp34", 5.475, 9.405, "cd_2msg 純粋CD: 6 raw/件。local は生成律速・hosted は replay 律速"),
     ("exp37", 10.39, 18.310, "cd_burst8 race: 34 raw/件。exp34 の約2倍（local→LB 比 1.76 で予測通り）"),
     ("exp38", 11.26, 15.445, "msgchain8 追加版。local +8% だが LB -15.6%（比 1.37）— 多 msg 候補は hosted replay で逆効果"),
+    ("exp56", 12.43, 20.275, "email bare くじ+固定 (CD 安全枠): exp37 上回る CD 系新ベスト。単一msg構造が hosted で有利"),
+    ("exp57", 12.27, 19.670, "email bare varied fill: 固定に小幅劣後 (-0.605)。CD 枠はくじ+固定が正解"),
 ]
 
 OUT = Path(__file__).parent / "local_vs_lb_correlation.png"

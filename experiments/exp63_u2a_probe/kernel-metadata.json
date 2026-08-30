@@ -1,0 +1,16 @@
+{
+  "id": "nikoro256/ai-agent-sec-exp63-probe",
+  "title": "AI Agent Sec exp63 probe",
+  "code_file": "ai-agent-sec-exp63-probe.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}
